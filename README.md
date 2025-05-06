@@ -64,6 +64,12 @@ La API quedará disponible en:
 
 ## Endpoints
 
+### Listar Citas por Fecha
+
+**GET** `/appointments?date=2025-05-07`
+
+---
+
 ### Crear Cita
 
 **POST** `/appointments`
@@ -80,6 +86,27 @@ La API quedará disponible en:
 ```
 
 ---
+
+### Actualizar Cita
+
+**PUT** `/appointments/{id}`
+
+**Body:**
+```json
+{
+  "date": "2025-05-08",
+  "time": "11:00"
+}
+```
+
+---
+
+### Cancelar Cita
+
+**DELETE** `/appointments/{id}`
+
+---
+
 
 ## Ver Datos en DynamoDB Local
 
