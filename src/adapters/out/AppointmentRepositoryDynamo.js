@@ -1,7 +1,7 @@
 const dynamoDb = require('../../infrastructure/dynamoDbClient');
 
 class AppointmentRepositoryDynamo {
-    async findByDate(date) {
+  async findByDate(date) {
     const params = {
       TableName: process.env.APPOINTMENTS_TABLE,
       FilterExpression: "#date = :dateVal AND #status = :status",
@@ -17,7 +17,34 @@ class AppointmentRepositoryDynamo {
   
     const result = await dynamoDb.scan(params).promise();
     return result.Items;
-    }
+  }
+
+  async save(appointment) {
+    const params = {
+      TableName: process.env.APPOINTMENTS_TABLE,
+      Item: appointment
+    };
+    await dynamoDb.put(params).promise();
+  }
+
+  async updateDate(id, newDate, newTime) {
+    const params = {
+      TableName: process.env.APPOINTMENTS_TABLE,
+      Key: { id },
+      UpdateExpression: "set #date = :newDate, #time = :newTime, #updatedAt = :updatedAt",
+      ExpressionAttributeNames: {
+        "#date": "date",
+        "#time": "time",
+        "#updatedAt": "updatedAt"
+      },
+      ExpressionAttributeValues: {
+        ":newDate": newDate,
+        ":newTime": newTime,
+        ":updatedAt": new Date().toISOString()
+      }
+    };
+    await dynamoDb.update(params).promise();
+  }
 }
 
 module.exports = AppointmentRepositoryDynamo;

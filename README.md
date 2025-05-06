@@ -64,6 +64,12 @@ La API quedará disponible en:
 
 ## Endpoints
 
+### Listar Citas por Fecha
+
+**GET** `/appointments?date=2025-05-07`
+
+---
+
 ### Crear Cita
 
 **POST** `/appointments`

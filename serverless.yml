@@ -13,6 +13,12 @@ provider:
     APPOINTMENTS_TABLE: 'AppointmentsTable'
 
 functions:
+  createAppointment:
+    handler: src/adapters/in/handlers.createAppointmentHandler
+    events:
+      - http:
+          path: appointments
+          method: post
   listAppointments:
     handler: src/adapters/in/handlers.listAppointmentsByDateHandler
     events:
@@ -23,6 +29,12 @@ functions:
             parameters:
               querystrings:
                 date: true
+  updateAppointment:
+    handler: src/adapters/in/handlers.updateAppointmentDateHandler
+    events:
+      - http:
+          path: appointments/{id}
+          method: put
 
 custom:
   dynamodb:
