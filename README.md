@@ -87,6 +87,27 @@ La API quedará disponible en:
 
 ---
 
+### Actualizar Cita
+
+**PUT** `/appointments/{id}`
+
+**Body:**
+```json
+{
+  "date": "2025-05-08",
+  "time": "11:00"
+}
+```
+
+---
+
+### Cancelar Cita
+
+**DELETE** `/appointments/{id}`
+
+---
+
+
 ## Ver Datos en DynamoDB Local
 
 Puedes levantar un administrador web para DynamoDB local:
