@@ -45,6 +45,23 @@ class AppointmentRepositoryDynamo {
     };
     await dynamoDb.update(params).promise();
   }
+
+  async cancel(id) {
+    const params = {
+      TableName: process.env.APPOINTMENTS_TABLE,
+      Key: { id },
+      UpdateExpression: "set #status = :status, #updatedAt = :updatedAt",
+      ExpressionAttributeNames: {
+        "#status": "status",
+        "#updatedAt": "updatedAt"
+      },
+      ExpressionAttributeValues: {
+        ":status": "DESHABILITADA",
+        ":updatedAt": new Date().toISOString()
+      }
+    };
+    await dynamoDb.update(params).promise();
+  }
 }
 
 module.exports = AppointmentRepositoryDynamo;

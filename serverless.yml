@@ -35,7 +35,12 @@ functions:
       - http:
           path: appointments/{id}
           method: put
-
+  cancelAppointment:
+    handler: src/adapters/in/handlers.cancelAppointmentHandler
+    events:
+      - http:
+          path: appointments/{id}
+          method: delete
 custom:
   dynamodb:
     stages:

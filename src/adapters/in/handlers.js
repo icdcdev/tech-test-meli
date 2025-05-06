@@ -50,3 +50,15 @@ module.exports.updateAppointmentDateHandler = async (event) => {
     body: JSON.stringify({ message: "Appointment updated" })
   };
 };
+
+module.exports.cancelAppointmentHandler = async (event) => {
+  const { id } = event.pathParameters;
+
+  const useCase = new CancelAppointment(appointmentRepository);
+  await useCase.execute(id);
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Appointment canceled" })
+  };
+};
