@@ -1,0 +1,48 @@
+service: tech-test-meli
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    APPOINTMENTS_TABLE: 'AppointmentsTable'
+
+functions:
+  listAppointments:
+    handler: src/adapters/in/handlers.listAppointmentsByDateHandler
+    events:
+      - http:
+          path: appointments
+          method: get
+          request:
+            parameters:
+              querystrings:
+                date: true
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+
+resources:
+  Resources:
+    AppointmentsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: AppointmentsTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

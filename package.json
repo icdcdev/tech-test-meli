@@ -1,0 +1,29 @@
+{
+  "name": "tech-test-meli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icdcdev/tech-test-meli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/icdcdev/tech-test-meli/issues"
+  },
+  "homepage": "https://github.com/icdcdev/tech-test-meli#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^14.4.0"
+  }
+}
